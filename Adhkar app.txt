@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Adhkar Coran & Sunnah - Invocations</title>
+<style>
+  :root {
+    --color-light-bg: #f9f9f9;
+    --color-light-text: #00563f;
+    --color-light-nav-bg: #007a54;
+    --color-light-nav-active: #00472e;
+    --color-light-card-bg: #e2f0ed;
+
+    --color-dark-bg: #121212;
+    --color-dark-text: #a2d5c6;
+    --color-dark-nav-bg: #264d47;
+    --color-dark-nav-active: #1b312d;
+    --color-dark-card-bg: #295245;
+  }
+
+  body {
+    font-family: Arial, sans-serif;
+    background: var(--color-light-bg);
+    color: var(--color-light-text);
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  body.dark {
+    background: var(--color-dark-bg);
+    color: var(--color-dark-text);
+  }
+
+  header {
+    background-color: var(--color-light-nav-bg);
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  body.dark header {
+    background-color: var(--color-dark-nav-bg);
+  }
+
+  nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    background: var(--color-light-nav-bg);
+    padding: 0.5rem;
+    gap: 0.4rem;
+  }
+  body.dark nav {
+    background: var(--color-dark-nav-bg);
+  }
+  nav button {
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+    padding: 0.5rem 1rem;
+    margin: 0.2rem;
+    cursor: pointer;
+    font-size: 1rem;
+    border-radius: 6px;
+    transition: background-color 0.3s;
+  }
+  nav button:hover,
+  nav button.active {
+    background-color: var(--color-light-nav-active);
+  }
+  body.dark nav button:hover,
+  body.dark nav button.active {
+    background-color: var(--color-dark-nav-active);
+  }
+
+  main {
+    max-width: 900px;
+    margin: 2rem auto 3rem;
+    background: var(--color-light-card-bg);
+    padding: 1rem 2rem 2rem 2rem;
+    border-radius: 18px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    transition: background-color 0.3s ease;
+  }
+  body.dark main {
+    background: var(--color-dark-card-bg);
+  }
+  h2 {
+    color: inherit;
+    margin-bottom: 0.5rem;
+    user-select: none;
+  }
+
+  #search-bar {
+    width: 100%;
+    font-size: 1rem;
+    padding: 0.5rem 12px;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    border: 2px solid var(--color-light-nav-bg);
+    outline-offset: 1px;
+    transition: border-color 0.3s;
+  }
+  body.dark #search-bar {
+    border-color: var(--color-dark-nav-bg);
+    background: #2c473f;
+    color: var(--color-dark-text);
+  }
+  #search-bar::placeholder {
+    color: #666;
+  }
+  body.dark #search-bar::placeholder {
+    color: #a2d5c6aa;
+  }
+
+  .invocation {
+    background: var(--color-light-bg);
+    margin-bottom: 15px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    line-height: 1.4;
+    position: relative;
+    user-select: text;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    transition: background-color 0.3s ease;
+  }
+  body.dark .invocation {
+    background: #1c372c;
+  }
+
+  .reference {
+    font-size: 0.85rem;
+    font-style: italic;
+    color: #555;
+    margin-top: 5px;
+  }
+  body.dark .reference {
+    color: #8bc8b9;
+  }
+
+  .copy-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #007a54;
+    font-weight: bold;
+    font-size: 1rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+    user-select: none;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  .copy-btn:hover {
+    background-color: #007a54;
+    color: white;
+  }
+  body.dark .copy-btn {
+    color: #a1d9c9;
+  }
+  body.dark .copy-btn:hover {
+    background-color: #004936;
+  }
+
+  #info {
+    margin-bottom: 1rem;
+    font-weight: bold;
+    text-align: right;
+    color: #007a54;
+  }
+  body.dark #info {
+    color: #a1d9c9;
+  }
+
+  #darkModeToggle {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background: var(--color-light-nav-bg);
+    border: none;
+    color: white;
+    font-size: 1.4rem;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 3px 7px rgba(0,0,0,0.3);
+    transition: background-color 0.3s;
+    user-select: none;
+    z-index: 110;
+  }
+  body.dark #darkModeToggle {
+    background: var(--color-dark-nav-bg);
+  }
+  #darkModeToggle:hover {
+    background-color: var(--color-light-nav-active);
+  }
+  body.dark #darkModeToggle:hover {
+    background-color: var(--color-dark-nav-active);
+  }
+
+  @media (max-width: 600px) {
+    nav button {
+      font-size: 0.85rem;
+      padding: 8px 10px;
+    }
+    main {
+      padding: 1rem;
+      margin: 1rem auto 2rem;
+    }
+    .invocation {
+      font-size: 1rem;
+    }
+    #darkModeToggle {
+      font-size: 1.1rem;
+      padding: 0.3rem 0.7rem;
+    }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Adhkar du Coran & Sunnah</h1>
+</header>
+<nav id="categories"></nav>
+<main>
+  <input type="text" id="search-bar" placeholder="Rechercher une invocation..." aria-label="Recherche des invocations" />
+  <h2 id="category-title">Quotidien</h2>
+  <div id="info"></div>
+  <div id="invocation-list"></div>
+</main>
+<button id="darkModeToggle" aria-label="Basculer en mode sombre">🌙</button>
+
+<script>
+// Données enrichies des adhkar
+const adhkarData = {
+  Quotidien: [
+    { text: "اللَّهُمَّ أَنْتَ رَبِّي لا إِلَهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ...", reference: "Sahih al-Bukhari 3336" },
+    { text: "أَسْتَغْفِرُ اللَّهَ وَأَتُوبُ إِلَيْهِ", reference: "Sahih al-Bukhari" },
+    { text: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الهَمِّ وَالحَزَنِ", reference: "Sahih al-Bukhari" },
+    { text: "رَبِّ اجْعَلْنِي مُقِيمَ الصَّلَاةِ", reference: "Coran 26:83" },
+  ],
+  Décès: [
+    { text: "اللَّهُمَّ اغْفِرْ لَهُ وَارْحَمْهُ وَعَافِهِ وَاعْفُ عَنْهُ، وَأَكْرِمْ نُزُلَهُ، وَوَسِّعْ مَدْخَلَهُ، وَاغْسِلْهُ بِالْمَاءِ وَالثَّلْجِ وَالْبَرَدِ", reference: "Sahih Muslim 961" },
+    { text: "إِنَّا لِلّهِ وَإِنَّا إِلَيْهِ رَاجِعُونَ", reference: "Coran 2:156" },
+    { text: "الرَّاحِمِينَ يُرْحَمُهُمُ الرَّحْمَنُ", reference: "Sahih Muslim" },
+  ],
+  Louange: [
+    { text: "الْحَمْدُ لِلّهِ رَبِّ الْعَالَمِينَ", reference: "Coran 1:2" },
+    { text: "سُبْحَانَ اللّهِ وَالْحَمْدُ لِلّهِ وَلَا إِلَهَ إِلَّا اللّهُ وَاللّهُ أَكْبَرُ", reference: "Hadith" },
+    { text: "لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللّهِ", reference: "Sahih Muslim" },
+    { text: "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ", reference: "Sahih Muslim" },
+  ],
+  Repentir: [
+    { text: "رَبَّنَا ظَلَمْنَا أَنْفُسَنَا وَإِنْ لَمْ تَغْفِرْ لَنَا وَتَرْحَمْنَا لَنَكُونَنَّ مِنَ الْخَاسِرِينَ", reference: "Coran 7:23" },
+    { text: "أَسْتَغْفِرُ اللّهَ الذِي لَا إِلَهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ وَأَتُوبُ إِلَيْهِ", reference: "Hadith" },
+    { text: "اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ...", reference: "Sahih al-Bukhari 6504" },
+  ],
+  Rabbanah: [
+    { text: "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ", reference: "Coran 2:201" },
+    { text: "رَبَّنَا لَا تُزِغْ قُلُوبَنَا بَعْدَ إِذْ هَدَيْتَنَا وَهَبْ لَنَا مِنْ لَدُنْكَ رَحْمَةً", reference: "Coran 3:8" },
+    { text: "رَبَّنَا لَا تَجْعَلْنَا مَعَ القَوْمِ الظَّالِمِينَ", reference: "Coran 7:47" },
+  ],
+  Protection: [
+    { text: "أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ", reference: "Sahih al-Bukhari" },
+    { text: "بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ", reference: "Sahih al-Bukhari 5805" },
+  ],
+  Santé: [
+    { text: "اللَّهُمَّ اشْفِ مَرْضَانَا وَمَرْضَى الْمُسْلِمِينَ", reference: "Invocation du Prophète" },
+    { text: "اللَّهُمَّ عَافِنِي فِي بَدَنِي، اللَّهُمَّ عَافِنِي فِي سَمْعِي، اللَّهُمَّ عَافِنِي فِي بَصَرِي", reference: "Sahih Muslim" },
+  ],
+};
+
+// Structure des catégories
+const categories = Object.keys(adhkarData);
+const nav = document.getElementById("categories");
+const title = document.getElementById("category-title");
+const list = document.getElementById("invocation-list");
+const info = document.getElementById("info");
+const searchBar = document.getElementById("search-bar");
+const darkToggle = document.getElementById("darkModeToggle");
+
+let currentCategory = categories[0];
+let currentData = adhkarData[currentCategory];
+
+// Affiche les invocations filtrées
+function showInvocations(filteredData) {
+  list.innerHTML = "";
+  if (filteredData.length === 0) {
+    list.textContent = "Aucune invocation trouvée.";
+  } else {
+    filteredData.forEach(item => {
+      const div = document.createElement("div");
+      div.classList.add("invocation");
+      div.textContent = item.text;
+
+      // Référence
+      if (item.reference) {
+        const ref = document.createElement("div");
+        ref.classList.add("reference");
+        ref.textContent = item.reference;
+        div.appendChild(ref);
+      }
+
+      // Bouton copier
+      const copyBtn = document.createElement("button");
+      copyBtn.classList.add("copy-btn");
+      copyBtn.title = "Copier l'invocation";
+      copyBtn.innerText = "📋";
+      copyBtn.addEventListener("click", () => {
+        navigator.clipboard.writeText(item.text).then(() => {
+          copyBtn.innerText = "✔";
+          setTimeout(() => copyBtn.innerText = "📋", 1500);
+        }).catch(() => alert("Erreur lors de la copie"));
+      });
+      div.appendChild(copyBtn);
+
+      list.appendChild(div);
+    });
+  }
+  info.textContent = `Invocations affichées : ${filteredData.length}`;
+}
+
+// Affiche une catégorie choisie
+function showCategory(category) {
+  currentCategory = category;
+  currentData = adhkarData[category];
+  title.textContent = category;
+  searchBar.value = "";
+
+  showInvocations(currentData);
+  updateActiveButton();
+}
+
+// Mets à jour le bouton actif
+function updateActiveButton() {
+  document.querySelectorAll("nav button").forEach(btn => {
+    btn.classList.toggle("active", btn.textContent === currentCategory);
+  });
+}
+
+// Recherche dans les invocations actuelles
+function searchInvocations(term) {
+  term = term.trim().toLowerCase();
+  if (!term) {
+    showInvocations(currentData);
+    return;
+  }
+  const filtered = currentData.filter(item => {
+    const text = item.text.toLowerCase();
+    const ref = item.reference ? item.reference.toLowerCase() : "";
+    return text.includes(term) || ref.includes(term);
+  });
+  showInvocations(filtered);
+}
+
+// Création des boutons catégories
+categories.forEach(cat => {
+  const btn = document.createElement("button");
+  btn.textContent = cat;
+  btn.addEventListener("click", () => showCategory(cat));
+  nav.appendChild(btn);
+});
+
+// Gestion de la recherche
+searchBar.addEventListener("input", () => {
+  searchInvocations(searchBar.value);
+});
+
+// Mode sombre toggle
+darkToggle.addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+  if (document.body.classList.contains("dark")) {
+    darkToggle.textContent = "☀";
+    darkToggle.title = "Basculer en mode clair";
+  } else {
+    darkToggle.textContent = "🌙";
+    darkToggle.title = "Basculer en mode sombre";
+  }
+});
+
+// Affichage initial
+showCategory(currentCategory);
+
+</script>
+</body>
+</html>
